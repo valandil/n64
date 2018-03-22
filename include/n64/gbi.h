@@ -11,6 +11,64 @@
 #include <string.h>
 #include <stdint.h>
 
+#ifdef F3D_GBI
+
+#define G_SPNOOP                      0x00
+#define G_MTX                         0x01
+#define G_RESERVED0                   0x02
+#define G_MOVEMEM                     0x03
+#define G_VTX                         0x04
+#define G_RESERVED1                   0x05
+#define G_DL                          0x06
+#define G_RESERVED2                   0x07
+#define G_RESERVED3                   0x08
+#define G_SPRITE2D_BASE               0x09
+#define G_TRI1                        0xBF
+#define G_CULLDL                      0xBE
+#define G_POPMTX                      0xBD
+#define G_MOVEWORD                    0xBC
+#define G_TEXTURE                     0xBB
+#define G_SETOTHERMODE_H              0xBA
+#define G_SETOTHERMODE_L              0xB9
+#define G_ENDDL                       0xB8
+#define G_SETGEOMETRYMODE             0xB7
+#define G_CLEARGEOMETRYMODE           0xB6
+#define G_LINE3D                      0xB5
+#define G_RDPHALF_1                   0xB4
+#define G_RDPHALF_2                   0xB3
+#define G_RDPHALF_CONT                0xB2
+#define G_NOOP                        0xC0
+
+#define G_SETCIMG                     0xFF
+#define G_SETZIMG                     0xFE
+#define G_SETTIMG                     0xFD
+#define G_SETCOMBINE                  0xFC
+#define G_SETENVCOLOR                 0xFB
+#define G_SETPRIMCOLOR                0xFA
+#define G_SETBLENDCOLOR               0xF9
+#define G_SETFOGCOLOR                 0xF8
+#define G_SETFILLCOLOR                0xF7
+#define G_FILLRECT                    0xF6
+#define G_SETTILE                     0xF5
+#define G_LOADTILE                    0xF4
+#define G_LOADBLOCK                   0xF3
+#define G_SETTILESIZE                 0xF2
+#define G_LOADTLUT                    0xF0
+#define G_RDPSETOTHERMODE             0xEF
+#define G_SETPRIMDEPTH                0xEE
+#define G_SETSCISSOR                  0xED
+#define G_SETCONVERT                  0xEC
+#define G_SETKEYR                     0xEB
+#define G_SETKEYGB                    0xEA
+#define G_RDPFULLSYNC                 0xE9
+#define G_RDPTILESYNC                 0xE8
+#define G_RDPPIPESYNC                 0xE7
+#define G_RDPLOADSYNC                 0xE6
+#define G_TEXRECTFLIP                 0xE5
+#define G_TEXRECT                     0xE4
+
+#else
+
 /* f3dex2 commands */
 #define G_NOOP                        0x00
 #define G_VTX                         0x01
@@ -67,6 +125,8 @@
 #define G_SETZIMG                     0xFE
 #define G_SETCIMG                     0xFF
 
+#endif
+
 /* s2dex2 commands */
 #define G_OBJ_RECTANGLE               0x01
 #define G_OBJ_SPRITE                  0x02
@@ -108,6 +168,21 @@
 #define G_TX_RENDERTILE               0
 
 /* geometry mode */
+#ifdef F3D_GBI
+#define G_ZBUFFER                     (gI_(0b1)<<0)
+#define G_SHADE                       (gI_(0b1)<<2)
+#define G_SHADING_SMOOTH              (gI_(0b1)<<9)
+#define G_CULL_FRONT                  (gI_(0b1)<<12)
+#define G_CULL_BACK                   (gI_(0b1)<<13)
+#define G_CULL_BOTH                   (G_CULL_FRONT|G_CULL_BACK)
+#define G_FOG                         (gI_(0b1)<<16)
+#define G_LIGHTING                    (gI_(0b1)<<17)
+#define G_TEXTURE_GEN                 (gI_(0b1)<<18)
+#define G_TEXTURE_GEN_LINEAR          (gI_(0b1)<<19)
+#define G_CLIPPING                    (gI_(0b0)<<0)
+
+#else
+
 #define G_ZBUFFER                     (gI_(0b1)<<0)
 #define G_SHADE                       (gI_(0b1)<<2)
 #define G_CULL_FRONT                  (gI_(0b1)<<9)
@@ -119,6 +194,8 @@
 #define G_TEXTURE_GEN_LINEAR          (gI_(0b1)<<19)
 #define G_SHADING_SMOOTH              (gI_(0b1)<<21)
 #define G_CLIPPING                    (gI_(0b1)<<23)
+
+#endif // F3D_GBI
 
 /* othermode lo */
 #define G_MDSFT_ALPHACOMPARE          0
@@ -773,12 +850,24 @@
 #define G_BZ_ORTHO                    1
 
 /* matrix params */
+#ifdef F3D_GBI
+#define G_MTX_NOPUSH                  (gI_(0b0)<<0)
+#define G_MTX_PUSH                    (gI_(0b1)<<2)
+#define G_MTX_MUL                     (gI_(0b0)<<0)
+#define G_MTX_LOAD                    (gI_(0b1)<<1)
+#define G_MTX_MODELVIEW               (gI_(0b0)<<0)
+#define G_MTX_PROJECTION              (gI_(0b1)<<0)
+
+#else
+
 #define G_MTX_NOPUSH                  (gI_(0b0)<<0)
 #define G_MTX_PUSH                    (gI_(0b1)<<0)
 #define G_MTX_MUL                     (gI_(0b0)<<1)
 #define G_MTX_LOAD                    (gI_(0b1)<<1)
 #define G_MTX_MODELVIEW               (gI_(0b0)<<2)
 #define G_MTX_PROJECTION              (gI_(0b1)<<2)
+
+#endif
 
 /* dmem params */
 #define G_MW_MATRIX                   0
@@ -788,7 +877,12 @@
 #define G_MW_FOG                      8
 #define G_MW_GENSTAT                  8
 #define G_MW_LIGHTCOL                 10
+
+#ifdef F3D_GBI
 #define G_MW_FORCEMTX                 12
+#else
+#define G_MW_POINTS                   12
+#endif
 #define G_MW_PERSPNORM                14
 
 #define G_MWO_NUMLIGHT                gI_(0x00)
@@ -850,6 +944,27 @@
 #define G_MWO_POINT_XYSCREEN          gI_(0x18)
 #define G_MWO_POINT_ZSCREEN           gI_(0x1C)
 
+#ifdef F3D_GBI
+#define G_MV_VIEWPORT                 0x80
+#define G_MV_MATRIX_1                 0x9E
+#define G_MV_MATRIX_2                 0x98
+#define G_MV_MATRIX_3                 0x9A
+#define G_MV_MATRIX_4                 0x9C
+
+# define G_MV_LOOKATY                 0x82
+# define G_MV_LOOKATX                 0x84
+# define G_MV_L0                      0x86
+# define G_MV_L1                      0x88
+# define G_MV_L2                      0x8A
+# define G_MV_L3                      0x8C
+# define G_MV_L4                      0x8E
+# define G_MV_L5                      0x90
+# define G_MV_L6                      0x92
+# define G_MV_L7                      0x94
+# define G_MV_TXTATT                  0x96
+
+#else
+
 #define G_MV_VIEWPORT                 8
 #define G_MV_LIGHT                    10
 #define G_MV_MATRIX                   14
@@ -864,6 +979,8 @@
 #define G_MVO_L5                      gI_(7*0x18)
 #define G_MVO_L6                      gI_(8*0x18)
 #define G_MVO_L7                      gI_(9*0x18)
+
+#endif // F3D_GBI
 
 /* frustum ratios */
 #define FRUSTRATIO_1                  gI_(1)

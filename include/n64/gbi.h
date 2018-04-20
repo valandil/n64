@@ -849,6 +849,11 @@
 #define G_BZ_PERSP                    0
 #define G_BZ_ORTHO                    1
 
+#ifdef F3D_GBI
+#define G_DL_PUSH                     gI_(0x00)
+#define G_DL_NOPUSH                   gI_(0x01)
+#endif
+
 /* matrix params */
 #ifdef F3D_GBI
 #define G_MTX_NOPUSH                  (gI_(0b0)<<0)
@@ -879,9 +884,9 @@
 #define G_MW_LIGHTCOL                 10
 
 #ifdef F3D_GBI
-#define G_MW_FORCEMTX                 12
-#else
 #define G_MW_POINTS                   12
+#else
+#define G_MW_FORCEMTX                 12
 #endif
 #define G_MW_PERSPNORM                14
 
@@ -891,6 +896,26 @@
 #define G_MWO_CLIP_RPX                gI_(0x14)
 #define G_MWO_CLIP_RPY                gI_(0x1C)
 #define G_MWO_SEGMENT_0               gI_(0x00)
+
+#ifdef F3D_GBI
+#define G_MWO_SEGMENT_1               gI_(0x01)
+#define G_MWO_SEGMENT_2               gI_(0x02)
+#define G_MWO_SEGMENT_3               gI_(0x03)
+#define G_MWO_SEGMENT_4               gI_(0x04)
+#define G_MWO_SEGMENT_5               gI_(0x05)
+#define G_MWO_SEGMENT_6               gI_(0x06)
+#define G_MWO_SEGMENT_7               gI_(0x07)
+#define G_MWO_SEGMENT_8               gI_(0x08)
+#define G_MWO_SEGMENT_9               gI_(0x09)
+#define G_MWO_SEGMENT_A               gI_(0x0A)
+#define G_MWO_SEGMENT_B               gI_(0x0B)
+#define G_MWO_SEGMENT_C               gI_(0x0C)
+#define G_MWO_SEGMENT_D               gI_(0x0D)
+#define G_MWO_SEGMENT_E               gI_(0x0E)
+#define G_MWO_SEGMENT_F               gI_(0x0F)
+
+#else
+
 #define G_MWO_SEGMENT_1               gI_(0x04)
 #define G_MWO_SEGMENT_2               gI_(0x08)
 #define G_MWO_SEGMENT_3               gI_(0x0C)
@@ -906,9 +931,32 @@
 #define G_MWO_SEGMENT_D               gI_(0x34)
 #define G_MWO_SEGMENT_E               gI_(0x38)
 #define G_MWO_SEGMENT_F               gI_(0x3C)
+
+#endif
+
 #define G_MWO_FOG                     gI_(0x00)
 #define G_MWO_aLIGHT_1                gI_(0x00)
 #define G_MWO_bLIGHT_1                gI_(0x04)
+
+#ifdef F3D_GBI
+#define G_MWO_bLIGHT_1                gI_(0x04)
+#define G_MWO_aLIGHT_2                gI_(0x20)
+#define G_MWO_bLIGHT_2                gI_(0x24)
+#define G_MWO_aLIGHT_3                gI_(0x40)
+#define G_MWO_bLIGHT_3                gI_(0x44)
+#define G_MWO_aLIGHT_4                gI_(0x60)
+#define G_MWO_bLIGHT_4                gI_(0x64)
+#define G_MWO_aLIGHT_5                gI_(0x80)
+#define G_MWO_bLIGHT_5                gI_(0x84)
+#define G_MWO_aLIGHT_6                gI_(0xA0)
+#define G_MWO_bLIGHT_6                gI_(0xA4)
+#define G_MWO_aLIGHT_7                gI_(0xC0)
+#define G_MWO_bLIGHT_7                gI_(0xC4)
+#define G_MWO_aLIGHT_8                gI_(0xE0)
+#define G_MWO_bLIGHT_8                gI_(0xE4)
+
+#else
+
 #define G_MWO_aLIGHT_2                gI_(0x18)
 #define G_MWO_bLIGHT_2                gI_(0x1C)
 #define G_MWO_aLIGHT_3                gI_(0x30)
@@ -923,6 +971,9 @@
 #define G_MWO_bLIGHT_7                gI_(0x94)
 #define G_MWO_aLIGHT_8                gI_(0xA8)
 #define G_MWO_bLIGHT_8                gI_(0xAC)
+
+#endif
+
 #define G_MWO_MATRIX_XX_XY_I          gI_(0x00)
 #define G_MWO_MATRIX_XZ_XW_I          gI_(0x04)
 #define G_MWO_MATRIX_YX_YY_I          gI_(0x08)

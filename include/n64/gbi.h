@@ -32,6 +32,7 @@
 #define G_SETOTHERMODE_L              0xB9
 #define G_ENDDL                       0xB8
 #define G_SETGEOMETRYMODE             0xB7
+#define G_GEOMETRYMODE                0xB7
 #define G_CLEARGEOMETRYMODE           0xB6
 #define G_LINE3D                      0xB5
 #define G_RDPHALF_1                   0xB4

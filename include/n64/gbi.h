@@ -749,6 +749,7 @@
 #define G_ACMUX_PRIM_LOD_FRAC         6
 
 /* combine modes */
+#define G_CC_TEXEL0ONLY               0,0,0,TEXEL0,0,0,0,TEXEL0
 #define G_CC_MODULATEI                TEXEL0,0,SHADE,0,0,0,0,SHADE
 #define G_CC_MODULATEIA               TEXEL0,0,SHADE,0,TEXEL0,0,SHADE,0
 #define G_CC_MODULATEIDECALA          TEXEL0,0,SHADE,0,0,0,0,TEXEL0
@@ -2211,8 +2212,17 @@ gsSPScisTextureRectangleFlip(ulx,   \
                                           ((int32_t)((zmax)-(zmin))&~1)+      \
                                           qs1616(zmin))
 #define gsDisplayList(dl,branch)      gO_(G_DL,gF_(branch,8,16),dl)
+
+#ifdef F3D_GBI
+#define gsDPHalf1(wordhi)             gO_(G_RDPHALF_2,0,wordhi)
+#define gsDPHalf2(wordlo)             gO_(G_RDPHALF_CONT,0,wordlo)
+
+#else
+
 #define gsDPHalf1(wordhi)             gO_(G_RDPHALF_1,0,wordhi)
 #define gsDPHalf2(wordlo)             gO_(G_RDPHALF_2,0,wordlo)
+#endif 
+
 #define gsDPLoadTile(tile,uls,ult,  \
                      lrs,lrt)         gO_(G_LOADTILE,                         \
                                           gF_(uls,12,12)|gF_(ult,12,0),       \
@@ -2233,7 +2243,7 @@ gsSPScisTextureRectangleFlip(ulx,   \
 #define                             \
 gsSPSetOtherMode(opc,shift,length,  \
                  data)                gO_(opc,                                \
-                                          gF_(shift, 8, 8)|                   \
+                                          gF_(shift, 8,8)|                    \
                                           gF_(length,8,0),data)
 #else
 #define                             \

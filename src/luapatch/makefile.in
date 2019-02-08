@@ -32,4 +32,4 @@ distclean                     :
 $(PROGNAME)                   : $(SRC)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
 $(DESTDIR)/$(bindir)                     :
-	$(MKDIR_P) $(bindir)
+	$(MKDIR_P) $(DESTDIR)/$(bindir)

@@ -1097,7 +1097,6 @@ static int strarg_mv(char *buf, uint32_t arg)
     case G_MV_MATRIX_2   : return sprintf(buf, "G_MV_MATRIX_2");
     case G_MV_MATRIX_3   : return sprintf(buf, "G_MV_MATRIX_3");
     case G_MV_MATRIX_4   : return sprintf(buf, "G_MV_MATRIX_4");
-
 #endif
     default             : return sprintf(buf, "%" PRIi32, (int32_t)arg);
   }

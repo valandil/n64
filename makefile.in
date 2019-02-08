@@ -190,7 +190,7 @@ install-sys                   :
 	for f in "$(bindir)/"*; do \
 		if test -f "$$f"; then \
 			f="$${f##*/}"; \
-			(cd "$(DESTDIR)$(sysroot)/usr/bin" && $(LN_S) -f "$(DESTDIR)$(bindir)/$$f" "$${f#$(target)-}"; \
+			(cd "$(DESTDIR)/$(sysroot)/usr/bin" && $(LN_S) -f "$(DESTDIR)/$(bindir)/$$f" "$${f#$(target)-}"; \
 		fi \
 	done
 	cp -R -p "$(srcdir)/include" "$(srcdir)/lib" "$(DESTDIR)/$(sysroot)/usr"

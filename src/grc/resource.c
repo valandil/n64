@@ -58,7 +58,7 @@ enum grc_error make_resource(const char *file_name, const char *resource_name,
   const char *as = getenv("AS");
   if (!as)
     as = "mips64-as";
-  const char *f = "%s - -o \"%s\" -march=vr4300 -mabi=32";
+  const char *f = "%s - -o \"%s\" -march=vr4300";
   char *s = malloc(snprintf(NULL, 0, f, as, file_name) + 1);
   FILE *p = NULL;
   if (!s) {

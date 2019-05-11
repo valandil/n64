@@ -187,11 +187,11 @@ quickclean-gdb                :
 install-sys                   :
 	$(MKDIR_P) "$(DESTDIR)$(sysroot)/usr"
 	$(MKDIR_P) "$(DESTDIR)$(sysroot)/usr/bin"
-	for f in "$(bindir)/"*; do
-		if test -f "$$f"; then
-			f="$${f##*/}";
-			(cd "$(DESTDIR)/$(sysroot)/usr/bin" && $(LN_S) -f "$(DESTDIR)/$(bindir)/$$f" "$${f#$(target)-}";
-		fi
+	for f in "$(bindir)/"*; do \
+		if test -f "$$f"; then \
+			f="$${f##*/}"; \
+			(cd "$(DESTDIR)/$(sysroot)/usr/bin" && $(LN_S) -f "$(DESTDIR)/$(bindir)/$$f" "$${f#$(target)-}";) \
+		fi \
 	done
 	cp -R -p "$(srcdir)/include" "$(srcdir)/lib" "$(DESTDIR)/$(sysroot)/usr"
 	touch $@

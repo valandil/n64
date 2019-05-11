@@ -39,34 +39,6 @@
 #define G_RDPHALF_CONT                0xB2
 #define G_NOOP                        0xC0
 
-#define G_SETCIMG                     0xFF
-#define G_SETZIMG                     0xFE
-#define G_SETTIMG                     0xFD
-#define G_SETCOMBINE                  0xFC
-#define G_SETENVCOLOR                 0xFB
-#define G_SETPRIMCOLOR                0xFA
-#define G_SETBLENDCOLOR               0xF9
-#define G_SETFOGCOLOR                 0xF8
-#define G_SETFILLCOLOR                0xF7
-#define G_FILLRECT                    0xF6
-#define G_SETTILE                     0xF5
-#define G_LOADTILE                    0xF4
-#define G_LOADBLOCK                   0xF3
-#define G_SETTILESIZE                 0xF2
-#define G_LOADTLUT                    0xF0
-#define G_RDPSETOTHERMODE             0xEF
-#define G_SETPRIMDEPTH                0xEE
-#define G_SETSCISSOR                  0xED
-#define G_SETCONVERT                  0xEC
-#define G_SETKEYR                     0xEB
-#define G_SETKEYGB                    0xEA
-#define G_RDPFULLSYNC                 0xE9
-#define G_RDPTILESYNC                 0xE8
-#define G_RDPPIPESYNC                 0xE7
-#define G_RDPLOADSYNC                 0xE6
-#define G_TEXRECTFLIP                 0xE5
-#define G_TEXRECT                     0xE4
-
 #else
 
 /* f3dex2 commands */
@@ -96,6 +68,9 @@
 #define G_RDPHALF_1                   0xE1
 #define G_SETOTHERMODE_L              0xE2
 #define G_SETOTHERMODE_H              0xE3
+
+#endif
+
 #define G_TEXRECT                     0xE4
 #define G_TEXRECTFLIP                 0xE5
 #define G_RDPLOADSYNC                 0xE6
@@ -109,7 +84,9 @@
 #define G_SETPRIMDEPTH                0xEE
 #define G_RDPSETOTHERMODE             0xEF
 #define G_LOADTLUT                    0xF0
+#ifndef F3D_GBI
 #define G_RDPHALF_2                   0xF1
+#endif
 #define G_SETTILESIZE                 0xF2
 #define G_LOADBLOCK                   0xF3
 #define G_LOADTILE                    0xF4
@@ -749,7 +726,6 @@
 #define G_ACMUX_PRIM_LOD_FRAC         6
 
 /* combine modes */
-#define G_CC_TEXEL0ONLY               0,0,0,TEXEL0,0,0,0,TEXEL0
 #define G_CC_MODULATEI                TEXEL0,0,SHADE,0,0,0,0,SHADE
 #define G_CC_MODULATEIA               TEXEL0,0,SHADE,0,TEXEL0,0,SHADE,0
 #define G_CC_MODULATEIDECALA          TEXEL0,0,SHADE,0,0,0,0,TEXEL0
@@ -1944,7 +1920,7 @@ gsSPBranchLessZrg(branchdl,vtx,     \
 
 #endif
 
-/// The Fast3D µcode does not support gSPLoadGometryMode.
+// The Fast3D ucode does not support gSPLoadGeometryMode.
 #ifndef F3D_GBI
 #define gsSPLoadGeometryMode(mode)    gsSPGeometryMode(~gI_(0),mode)
 #endif

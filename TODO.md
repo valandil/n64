@@ -1,4 +1,0 @@
-- [ ] Compare the `gDma*` macros to glankk's private macros.
-- [ ] Verify the `gSPMatrix` definitions.
-- [ ] Verify the `gSPVertex` definitions.
-- [ ] Verify the `gSPViewport` definitions.

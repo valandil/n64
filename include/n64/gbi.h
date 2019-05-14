@@ -69,6 +69,8 @@
 #define G_SETOTHERMODE_L              0xE2
 #define G_SETOTHERMODE_H              0xE3
 
+#endif
+
 #define G_TEXRECT                     0xE4
 #define G_TEXRECTFLIP                 0xE5
 #define G_RDPLOADSYNC                 0xE6
